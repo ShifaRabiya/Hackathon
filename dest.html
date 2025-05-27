@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wonders of India</title>
+    <style>
+        
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f1f1f1;
+            padding-top: 70px; 
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 36px;
+            z-index: 10;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            display: flex;
+            padding: 40px;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 1.2s ease-out;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 500px; 
+            overflow: hidden; 
+        }
+
+        .container img {
+            max-width: 80%;
+            max-height: 80%; 
+            object-fit: cover; 
+            border-radius: 10px; 
+            margin: 5px; 
+            box-sizing: border-box; 
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); 
+            transition: transform 0.5s ease-out;
+        }
+
+        .container img:hover {
+            transform: scale(1.05);
+        }
+
+        .container.left {
+            flex-direction: row-reverse;
+        }
+
+        .container.left img {
+            order: -1; 
+        }
+
+        .description {
+            max-width: 45%;
+            font-size: 18px;
+            line-height: 1.6;
+            color: white; /* Set text color to white */
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.5s ease-out, transform 0.8s ease-out;
+            animation: slideIn 1s forwards;
+            padding-left: 20px; /* Add padding-left for some space */
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .in-view .description {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .in-view img {
+            transform: scale(1.15);
+        }
+
+        .out-view {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit; 
+            filter: blur(5px); 
+            z-index: -2; 
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); 
+            z-index: -1;
+        }
+
+        
+        .container {
+            margin: 0; 
+            padding: 0; 
+        }
+        
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+                background-position: top;
+                height: auto; 
+            }
+
+            .container img {
+                max-width: 80%; 
+                height: auto; 
+                object-fit: contain; 
+                margin-bottom: 20px;
+            }
+
+            .description {
+                margin-left: 5px;
+                max-width: 100%;
+                padding-left: 0;
+            }
+        }
+
+        
+        #container1 .description, #container3 .description, #container5 .description {
+            margin-left: 20px;
+        }
+        
+a {
+    color: rgb(255, 255, 255);
+    text-decoration: none; 
+    transition: text-shadow 0.3s ease;
+}
+
+a:hover {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    text-decoration: underline;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <div class="header">Wonders of India</div>
+
+    <div class="container left" id="container1" style="background-image: url('img/d1.jpg');">
+        <img src="img/d1.jpg" alt="Wonders Image 1">
+        <div class="description">
+            <h2>TAJ MAHAL</h2>
+            <p>The Taj Mahal, located in Agra, India, is one of the most iconic monuments in the world. Built by Emperor Shah Jahan in memory of his beloved wife Mumtaz Mahal, it is a symbol of eternal love. This magnificent marble mausoleum is renowned for its stunning architecture, intricate carvings, and the grand reflection of its structure in the surrounding pools. The Taj Mahal is a UNESCO World Heritage Site and attracts millions of visitors annually for its beauty and historical significance.</p>
+            <div class="location">
+                Location: <a href="https://maps.app.goo.gl/ZbtqP95eq9W2m5bZ6" target="_blank">Agra, New Delhi</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="container2" style="background-image: url('img/d2.jpg');">
+        <img src="img/d2.jpg" alt="Wonders Image 2">
+        <div class="description">
+            <h2>HAWA MAHAL</h2>
+            <p>The Hawa Mahal, also known as the "Palace of Winds," is an architectural gem located in Jaipur, Rajasthan. This unique structure features a five-story facade with 953 small windows, or jharokhas, which were designed to allow royal women to observe street life without being seen. Built in 1799 by Maharaja Sawai Pratap Singh, the Hawa Mahal's design resembles the honeycomb of a beehive and is a remarkable example of Rajput architecture. Its pink sandstone exterior and delicate lattice work make it a must-see attraction in Jaipur.</p>
+            <div class="location">
+                Location: <a href="https://maps.app.goo.gl/7F7YbU3hzvDwWCVu7" target="_blank">Jaipur, Rajasthan</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container left" id="container3" style="background-image: url('img/d3.jpg');">
+        <img src="img/d3.jpg" alt="Wonders Image 3">
+        <div class="description">
+            <h2>HUMAYUN'S TOMB</h2>
+            <p>Humayun's Tomb, located in Delhi, is the tomb of the Mughal Emperor Humayun. Built by his widow, Empress Bega Begum, in the mid-16th century, the tomb is an architectural masterpiece and a precursor to the Taj Mahal. The structure is known for its beautiful Persian-style garden, symmetrical design, and the use of red sandstone and white marble. It was declared a UNESCO World Heritage Site in 1993 and remains an important symbol of Mughal architecture in India.</p>
+            <div class="location">
+                Location: <a href="https://maps.app.goo.gl/FDDgbWkgi2Z92zZb8" target="_blank">Nizamuddin, New Delhi</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="container4" style="background-image: url('img/d4.jpg');">
+        <img src="img/d4.jpg" alt="Wonders Image 4">
+        <div class="description">
+            <h2>RAMESWARAM</h2>
+            <p>Rameswaram is a town located on Pamban Island in Tamil Nadu, known for its sacred significance in Hindu mythology. It is one of the Char Dham pilgrimage sites and is believed to be the place where Lord Rama built a bridge to Lanka to rescue his wife, Sita, from Ravana. The town is home to the famous Ramanathaswamy Temple, which features towering spires, intricate corridors, and is one of the twelve Jyotirlinga temples in India. Rameswaram is not only a spiritual hub but also a coastal beauty, with serene beaches and picturesque landscapes.</p>
+            <div class="location">
+                Location: <a href="https://maps.app.goo.gl/VCRsmfi7aFoCS2t18" target="_blank">Rameswaram, Tamil Nadu</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container left" id="container5" style="background-image: url('img/d5.jpg');">
+        <img src="img/d5.jpg" alt="Wonders Image 5">
+        <div class="description">
+            <h2>ALLEPPEY BACKWATERS</h2>
+            <p>The Alleppey Backwaters, located in the state of Kerala, are a stunning network of lagoons, lakes, and rivers that crisscross the lush green landscape. Known as the "Venice of the East," Alleppey is famous for its tranquil houseboat cruises through the serene waters, offering a unique way to explore the region's natural beauty. The backwaters are dotted with traditional Kerala villages, coconut palms, and vibrant wildlife, making it a peaceful retreat and one of the most popular tourist destinations in India.</p>
+            <div class="location">
+                Location: <a href="https://maps.app.goo.gl/K3jjrAZBERfaLdhbA" target="_blank">Alleppey, Kerala</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkInView() {
+            const containers = document.querySelectorAll('.container');
+            containers.forEach((container) => {
+                const rect = container.getBoundingClientRect();
+                const inView = rect.top <= window.innerHeight && rect.bottom >= 0;
+                
+                if (inView) {
+                    container.classList.add('in-view');
+                    container.classList.remove('out-view');
+                } else {
+                    container.classList.add('out-view');
+                    container.classList.remove('in-view');
+                }
+            });
+        }
+
+        window.addEventListener('load', checkInView);
+        window.addEventListener('scroll', checkInView);
+    </script>
+</body>
+</html>

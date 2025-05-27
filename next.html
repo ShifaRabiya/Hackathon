@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore More</title>
+    <style>
+        /* General body styling */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #4e3d00;
+        }
+
+        /* Full background styling */
+        .background {
+            background-image: url('img/bg1.jpg'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            height: 220vh; /* Change from 100px to 100vh */
+            position: absolute; /* Position it absolutely */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0; /* Ensures background stays behind everything */
+            filter: blur(8px); /* Blurs the background image */
+            transition: filter 1s ease; /* Smooth transition for blur */
+        }
+
+        /* Gradient overlay on the background */
+        .background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 238, 181, 0.514), rgba(255, 255, 255, 0));
+            z-index: -1; /* Keeps the gradient behind everything */
+        }
+
+        /* Image slider container */
+        .image-container {
+            margin: 0%;
+            position: relative;
+            overflow: hidden;
+            height: 70vh;
+            max-height:500px;
+            min-height: 300px ;
+            z-index: 1; /* Ensures slider is above the background */
+        }
+
+        /* Slider images container */
+        .slider-images {
+            display: flex;
+            transition: transform 1s ease-in-out;
+            width: 500%; /* Total width to accommodate all 5 images in a row */
+            height: 100%; /* Ensure it takes the full height of the container */
+        }
+
+        /* Anchor tags for clickable images */
+        .slider-images a {
+            width: 20%; /* Each image takes up 20% of the container width */
+            height: 100%; /* Ensure it matches the height of the slider container */
+            display: flex; /* Enables proper alignment for child elements */
+        }
+
+        /* Images inside the slider */
+        .slider-images img {
+            width: 100%; /* Full width of the parent */
+            height: 100%; /* Matches the container height dynamically */
+            object-fit: cover; /* Ensures images fill the container while maintaining aspect ratio */
+        }
+
+        /* Button styling */
+        .prev-button,
+        .next-button {
+            position: absolute;
+            top: 50%; /* Always positioned in the vertical center */
+            transform: translateY(-50%); /* Perfectly centers the button vertically */
+            background-color: rgba(0, 0, 0, 0.5); /* Transparent dark background */
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 2; /* Ensures buttons are above the slider */
+            border-radius: 50%; /* Circular buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            width: 60px; /* Circular shape width */
+            height: 60px; /* Circular shape height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .prev-button {
+            left: 10px; /* Position the button to the left of the slider */
+        }
+
+        .next-button {
+            right: 10px; /* Position the button to the right of the slider */
+        }
+
+        /* Styling for the SVG map container */
+        .map-container {
+            margin-top: 50px; /* Add some space after the image slider */
+            position: relative;
+            text-align: center;
+            height: auto;
+            max-height: 90vh;
+        }
+
+        /* State hover effect styling */
+        .state {
+            fill: #ccc;
+            transition: fill 0.3s ease;
+            cursor: pointer;
+        }
+
+        .state:hover {
+            fill: #ff7f50; /* Change color on hover */
+        }
+
+        .state:hover + .state-name {
+            opacity: 1; /* Show name on hover */
+        }
+
+        .state-name {
+            position: absolute;
+            opacity: 0;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        /* Positioning the state names */
+        .state-name[data-state="state1"] {
+            top: 10%; left: 20%;
+        }
+
+        .state-name[data-state="state2"] {
+            top: 15%; left: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Image -->
+    <div class="background"></div>
+
+    <!-- Image Slider Section -->
+    <div class="image-container">
+        <div class="slider-images" id="slider-images">
+            <!-- Each image is wrapped in an anchor tag -->
+            <a href="dest.html"><img src="img/3.png" alt="Image 1"></a>
+            <a href="art.html"><img src="img/4.png" alt="Image 2"></a>
+            <a href="trad.html"><img src="img/5.png" alt="Image 3"></a>
+            <a href="food.html"><img src="img/2.jpg" alt="Image 4"></a>
+            <a href="dest.html"><img src="img/3.png" alt="Image 1 (Clone)"></a>
+        </div>
+        <!-- Previous Button -->
+        <button class="prev-button" onclick="moveToPreviousImage()">&#10094;</button>
+
+        <!-- Next Button -->
+        <button class="next-button" onclick="moveToNextImage()">&#10095;</button>
+    </div>
+
+    <!-- Map Section -->
+    <div class="map-container">
+        <img src="img/in.svg" alt="Map" style="max-width: 100%; height: auto;">
+            <!-- Example states (Replace with actual SVG paths for Indian states) -->
+            <path class="state" id="state1" d="M100,100L150,150L100,200L50,150Z"/>
+            <path class="state" id="state2" d="M200,200L250,250L200,300L150,250Z"/>
+            <!-- State names (for hover display) -->
+            <div class="state-name" data-state="state1">State 1</div>
+            <div class="state-name" data-state="state2">State 2</div>
+        </svg>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const sliderImages = document.getElementById('slider-images');
+        const totalUniqueImages = 4; // Number of unique images (excluding the cloned one)
+        let sliderInterval;
+    
+        // Function to slide the images automatically
+        function slideImages() {
+            // Increment the current index
+            currentIndex++;
+    
+            // Slide the images
+            sliderImages.style.transition = 'transform 1s ease-in-out'; // Ensure smooth transition
+            sliderImages.style.transform = `translateX(-${currentIndex * 20}%)`;
+    
+            // If the current index reaches the cloned image, reset the slider
+            if (currentIndex === totalUniqueImages) {
+                setTimeout(() => {
+                    sliderImages.style.transition = 'none'; // Disable transition temporarily
+                    sliderImages.style.transform = 'translateX(0)'; // Reset to the first image
+                    currentIndex = 0; // Reset index
+                    setTimeout(() => {
+                        sliderImages.style.transition = 'transform 1s ease-in-out'; // Re-enable transition
+                    }, 50); // Delay for the reset
+                }, 1000); // Wait for the transition to complete before resetting
+            }
+        }
+    
+        // Start or restart the slider interval
+        function startSlider() {
+            clearInterval(sliderInterval); // Clear any existing interval
+            sliderInterval = setInterval(slideImages, 5000); // Start a new interval
+        }
+    
+        // Move to the previous image
+        function moveToPreviousImage() {
+            clearInterval(sliderInterval); // Pause the automatic slider
+            if (currentIndex === 0) {
+                // Handle when user tries to go back from the first image
+                currentIndex = totalUniqueImages; // Go to the last unique image
+                sliderImages.style.transition = 'none'; // Disable transition
+                sliderImages.style.transform = `translateX(-${currentIndex * 20}%)`;
+                setTimeout(() => {
+                    sliderImages.style.transition = 'transform 1s ease-in-out'; // Re-enable transition
+                }, 50);
+            } else {
+                currentIndex = (currentIndex - 1 + totalUniqueImages + 1) % (totalUniqueImages + 1);
+                sliderImages.style.transform = `translateX(-${currentIndex * 20}%)`;
+            }
+            setTimeout(startSlider, 5000); // Resume automatic slider after 5 seconds
+        }
+    
+        // Move to the next image
+        function moveToNextImage() {
+            clearInterval(sliderInterval); // Pause the automatic slider
+            currentIndex++;
+            sliderImages.style.transition = 'transform 1s ease-in-out'; // Smooth transition
+            sliderImages.style.transform = `translateX(-${currentIndex * 20}%)`;
+    
+            if (currentIndex === totalUniqueImages) {
+                setTimeout(() => {
+                    sliderImages.style.transition = 'none'; // Disable transition temporarily
+                    sliderImages.style.transform = 'translateX(0)'; // Reset to the first image
+                    currentIndex = 0; // Reset index
+                    setTimeout(() => {
+                        sliderImages.style.transition = 'transform 1s ease-in-out'; // Re-enable transition
+                    }, 50);
+                }, 1000);
+            }
+    
+            setTimeout(startSlider, 5000); // Resume automatic slider after 5 seconds
+        }
+    
+        // Initialize the slider interval on page load
+        startSlider();
+    </script>
+</body>
+</html>

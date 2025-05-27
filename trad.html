@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeless Festivities</title>
+    <style>
+        /* General body styling */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f1f1f1;
+            padding-top: 70px; /* Give space for sticky header */
+        }
+
+        /* Sticky header styling */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 36px;
+            z-index: 10;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Container styles */
+        .container {
+            display: flex;
+            padding: 40px;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 1.2s ease-out;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 500px; /* Set a fixed height for the containers */
+            overflow: hidden; /* Prevents the image from extending outside */
+        }
+
+        /* Ensure each image fits inside the container */
+        .container img {
+            max-width: 80%; /* Makes images smaller */
+            max-height: 80%; /* Makes images smaller */
+            object-fit: cover; /* Ensures images cover the container */
+            border-radius: 10px; /* Round corners */
+            margin: 5px; /* Adds a 5px margin around the image */
+            box-sizing: border-box; /* Ensures margin is considered inside the container */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Adds shadow to the image */
+            transition: transform 0.5s ease-out;
+        }
+
+        /* Alternate position of image and description */
+        .container.left {
+            flex-direction: row-reverse;
+        }
+
+        .container.left img {
+            order: -1; /* Move image to the left for this class */
+        }
+
+        .container img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Description styling */
+        .description {
+            max-width: 45%;
+            font-size: 18px;
+            line-height: 1.6;
+            color: white; /* Set text color to white */
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.5s ease-out, transform 0.8s ease-out;
+            animation: slideIn 1s forwards;
+            padding-left: 20px; /* Add padding-left for some space */
+        }
+
+        /* Slide-in animation for the description */
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Scroll in animation */
+        .in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .in-view .description {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .in-view img {
+            transform: scale(1.15);
+        }
+
+        /* Simple fade-out effect when out of view */
+        .out-view {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+        }
+
+        /* Overlay dark background, blur, and darken effect */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit; /* Inherit the background image from the container */
+            filter: blur(5px); /* Apply blur effect */
+            z-index: -2; /* Ensure it's behind the overlay */
+        }
+
+        /* Overlay effect */
+        .container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+            z-index: -1; /* Ensure it's above the blurred background but behind the content */
+        }
+
+        /* Remove space between containers */
+        .container {
+            margin: 0; /* Remove margin between containers */
+            padding: 0; /* Remove extra padding */
+        }
+
+        /* Media query for mobile responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+                background-position: top;
+                height: auto; /* Make container height adjust automatically on smaller screens */
+            }
+
+            .container img {
+                max-width: 80%; /* Makes images smaller */
+                height: auto; /* Maintain aspect ratio */
+                object-fit: contain; /* Adjust image fitting for mobile */
+                margin-bottom: 20px;
+            }
+
+            .description {
+                margin-left: 5px;
+                max-width: 100%;
+                padding-left: 0; /* Remove extra padding-left for mobile */
+            }
+        }
+
+        /* Add left margin for specific containers */
+        #container1 .description, #container3 .description, #container5 .description {
+            margin-left: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">Timeless Indian Arts</div>
+
+    <!-- First container (Image on Left) -->
+    <div class="container left" id="container1" style="background-image: url('img/t1.jpg');">
+        <img src="img/t1.jpg" alt="Wonders Image 1">
+        <div class="description">
+            <h2>DIWALI</h2>
+            <p>Diwali, also known as the Festival of Lights, is one of the most significant and widely celebrated festivals in India. It marks the triumph of light over darkness and good over evil, commemorating the return of Lord Rama to his kingdom after defeating the demon king Ravana. During Diwali, homes and public spaces are illuminated with oil lamps called diyas, and colorful rangoli (artistic patterns) decorate doorways. People celebrate with prayers, firecrackers, and the exchange of sweets and gifts. The festival signifies new beginnings and is often associated with cleanliness, prosperity, and the worship of Lakshmi, the goddess of wealth</p>
+        </div>
+    </div>
+
+    <!-- Second container (Image on Right) -->
+    <div class="container" id="container2" style="background-image: url('img/t2.jpg');">
+        <img src="img/t2.jpg" alt="Wonders Image 2">
+        <div class="description">
+            <h2>HOLI</h2>
+            <p>Holi, the Festival of Colors, is a joyous and exuberant celebration that heralds the arrival of spring. It is celebrated by throwing vibrant colored powders at each other, dancing, singing, and indulging in sweets. The festival symbolizes the victory of good over evil, as it is believed to mark the burning of the demoness Holika. People come together to celebrate the vibrant spirit of life, friendship, and unity, irrespective of age, gender, or background. Holi is often accompanied by traditional foods like gujiya (a sweet dumpling), thandai (a spiced drink), and the merry sounds of music and laughter.</p>
+        </div>
+    </div>
+
+    <!-- Third container (Image on Left) -->
+    <div class="container left" id="container3" style="background-image: url('img/t3.jpg');">
+        <img src="img/t3.jpg" alt="Wonders Image 3">
+        <div class="description">
+            <h2>ONAM</h2>
+            <p>Onam is the most important festival of Kerala, celebrated in honor of King Mahabali, whose spirit is believed to visit his people during this time. It is a harvest festival that celebrates the bounty of nature, with a focus on prosperity, abundance, and community. The festival spans several days and includes vibrant cultural activities like boat races (Vallam Kali), traditional dance (Onam Thiruvathira), and the famous Onam Sadhya, a grand vegetarian feast served on a banana leaf. The festival culminates with the Thiruvonam day, during which families come together to celebrate with prayers, feasts, and cultural performances. Onam is a time of unity, joy, and gratitude.</p>
+        </div>
+    </div>
+
+    <!-- Fourth container (Image on Right) -->
+    <div class="container" id="container4" style="background-image: url('img/t4.webp');">
+        <img src="img/t4.webp" alt="Wonders Image 4">
+        <div class="description">
+            <h2>PONGAL</h2>
+            <p>Pongal is a major harvest festival celebrated in Tamil Nadu and other southern states of India. The festival is dedicated to the Sun God and marks the end of the winter solstice. The highlight of the festival is the preparation of Pongal, a sweet dish made from newly harvested rice, cooked with jaggery, coconut, and cardamom. The festival is celebrated with much enthusiasm, involving rituals, prayers, and the decoration of homes with colorful kolams (rangoli). The four-day celebration includes Bhogi Pongal (celebrating the burning of old items), Surya Pongal (dedicated to the Sun God), Mattu Pongal (honoring cattle), and Kanum Pongal (a time for family reunions). It is a celebration of gratitude for nature's bounty and a symbol of prosperity and hope for the year ahead.</p>
+        </div>
+    </div>
+
+    <div class="container left" id="container3" style="background-image: url('img/t5.jpg');">
+        <img src="img/t5.jpg" alt="Wonders Image 3">
+        <div class="description">
+            <h2>DURGA PUJA</h2>
+            <p>Durga Puja is a grand Hindu festival celebrated with immense devotion and cultural fervor, primarily in West Bengal, Assam, Odisha, Tripura, and other parts of India, as well as among Bengali communities worldwide. This festival honors Goddess Durga, symbolizing the triumph of good over evil. According to mythology, Durga defeated the buffalo demon Mahishasura, restoring cosmic balance. The festivities span ten days, with the last five—Shasthi, Saptami, Ashtami, Navami, and Dashami—being the most significant. Elaborate clay idols of Goddess Durga and her children (Lakshmi, Saraswati, Ganesha, and Kartikeya) are intricately crafted and worshipped in beautifully decorated pandals (temporary structures).</p>
+        </div>
+    </div>
+
+    <script>
+        // Function to check if a container is in view
+        function checkInView() {
+            const containers = document.querySelectorAll('.container');
+            containers.forEach((container) => {
+                const rect = container.getBoundingClientRect();
+                const inView = rect.top <= window.innerHeight && rect.bottom >= 0;
+                
+                if (inView) {
+                    container.classList.add('in-view');
+                    container.classList.remove('out-view');
+                } else {
+                    container.classList.add('out-view');
+                    container.classList.remove('in-view');
+                }
+            });
+        }
+
+        // Check on page load and scroll
+        window.addEventListener('load', checkInView);
+        window.addEventListener('scroll', checkInView);
+    </script>
+</body>
+</html>

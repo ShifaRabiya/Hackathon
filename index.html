@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Unveiled</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+        }
+
+        .background {
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: background-image 1.5s ease-in-out; 
+        }
+
+        .background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0));
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: left;
+            padding: 50px;
+            max-width: 800px;
+        }
+
+        .title {
+            font-size: 70px;
+            font-weight: bold;
+            color: #fff;
+            margin: 10px 0;
+            line-height: 1.2;
+        }
+
+        .title span {
+            font-size: 30px;
+            font-weight: normal;
+            color: #ccc;
+            display: block;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            font-weight: 300;
+            color: #eee;
+            margin-top: 10px;
+        }
+
+        .chatbox-button {
+            position: fixed;
+            top: 20px; 
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #00000087; 
+            border: none;
+            border-radius: 50%; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .chatbox-button:hover {
+            background-color: #000001d3;
+            transform: scale(1.1); 
+        }
+
+        .chatbox-button i {
+            font-size: 24px;
+            color: #fff; 
+        }
+
+        .arrow-button {
+            position: fixed;
+            bottom: 20px; 
+            right: 20px;
+            width: auto; 
+            padding: 10px 20px;
+            background-color: #00000087; 
+            border: none;
+            border-radius: 30px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 18px; 
+            color: #fff; 
+        }
+
+        .arrow-button:hover {
+            background-color: #000001d3;
+            transform: scale(1.05); 
+        }
+
+        .arrow-button i {
+            margin-left: 8px;
+            font-size: 20px;
+        }
+
+        #chatbox-container {
+            display: none;
+             position: fixed;
+            top: 100px;
+            bottom: 10%;
+            right: 0;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <div class="background" id="background">
+        <div class="content">
+            <h1 class="title">
+                India <br>
+                Unveiled
+            </h1>
+            <p class="subtitle">A Journey Through Time and Culture</p>
+        </div>
+    </div>
+
+    <a href="next.html">
+        <button class="arrow-button">
+            Explore More >
+        </button>
+    </a>
+
+    <script>
+        const images = [
+            'img/bg2.jpg', 
+            'img/bg1.jpg',
+            'img/bg3.jpg',
+            'img/bg4.jpg',
+            'img/bg5.jpg',
+        ];
+
+        let currentImageIndex = 0;
+        const backgroundElement = document.getElementById('background');
+
+        backgroundElement.style.backgroundImage = `url(${images[currentImageIndex]})`;
+
+        function changeBackgroundImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length; // Cycle through images
+            backgroundElement.style.backgroundImage = `url(${images[currentImageIndex]})`;  
+        }
+
+        setInterval(changeBackgroundImage, 5000);
+
+
+        const chatButton = document.getElementById('open-chatbox');
+        const chatboxContainer = document.getElementById('chatbox-container');
+
+
+        chatButton.addEventListener('click', () => {
+            if (chatboxContainer.style.display === 'none' || chatboxContainer.style.display === '') {
+                chatboxContainer.style.display = 'block';
+            } else {
+                chatboxContainer.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

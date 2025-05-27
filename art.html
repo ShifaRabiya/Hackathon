@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wonders of India</title>
+    <style>
+        
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f1f1f1;
+            padding-top: 70px; 
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 36px;
+            z-index: 10;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            display: flex;
+            padding: 40px;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 1.2s ease-out;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 500px; 
+            overflow: hidden; 
+        }
+
+        .container img {
+            max-width: 80%;
+            max-height: 80%; 
+            object-fit: cover; 
+            border-radius: 10px; 
+            margin: 5px; 
+            box-sizing: border-box; 
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); 
+            transition: transform 0.5s ease-out;
+        }
+
+        .container img:hover {
+            transform: scale(1.05);
+        }
+
+        .container.left {
+            flex-direction: row-reverse;
+        }
+
+        .container.left img {
+            order: -1; 
+        }
+
+        .description {
+            max-width: 45%;
+            font-size: 18px;
+            line-height: 1.6;
+            color: white; 
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.5s ease-out, transform 0.8s ease-out;
+            animation: slideIn 1s forwards;
+            padding-left: 20px; /* Add padding-left for some space */
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .in-view .description {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .in-view img {
+            transform: scale(1.15);
+        }
+
+        .out-view {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit; 
+            filter: blur(5px); 
+            z-index: -2; 
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); 
+            z-index: -1;
+        }
+
+        
+        .container {
+            margin: 0; 
+            padding: 0; 
+        }
+        
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+                background-position: top;
+                height: auto; 
+            }
+
+            .container img {
+                max-width: 80%; 
+                height: auto; 
+                object-fit: contain; 
+                margin-bottom: 20px;
+            }
+
+            .description {
+                margin-left: 5px;
+                max-width: 100%;
+                padding-left: 0;
+            }
+        }
+
+        
+        #container1 .description, #container3 .description, #container5 .description {
+            margin-left: 20px;
+        }
+        
+a {
+    color: rgb(255, 255, 255);
+    text-decoration: none; 
+    transition: text-shadow 0.3s ease;
+}
+
+a:hover {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    text-decoration: underline;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="header">Timeless Indian Arts</div>
+
+    <div class="container left" id="container1" style="background-image: url('img/a1.jpg');">
+        <img src="img/a1.jpg" alt="Wonders Image 1" data-hover="img/">
+        <div class="description">
+            <h2>KATHAKALI</h2>
+            <p>Kathakali is a classical dance-drama that originated in Kerala, India. It is known for its elaborate costumes, vibrant makeup, and expressive gestures. Combining dance, drama, and music, Kathakali often portrays mythological stories from Hindu epics like the Ramayana and Mahabharata. The performances involve intricate hand gestures (mudras), detailed facial expressions, and rhythmic movements to narrate stories.</p>
+            <a style="color: #ffffff;" href="https://youtu.be/nwiLwsgicno?si=GzdUDBeA23bbvCfN" class="recipe-link" target="_blank">Watch a video</a>
+        </div>
+    </div>
+
+    <div class="container" id="container2" style="background-image: url('img/a2.jpg');">
+        <img src="img/a2.jpg" alt="Wonders Image 2" data-hover="img/a2-hover.jpg">
+        <div class="description">
+            <h2>BHARATNATYAM</h2>
+            <p>Bharatanatyam, originating from Tamil Nadu, is one of the oldest and most revered classical dance forms of India. Traditionally performed in temples, it was a devotional offering to deities, especially Lord Shiva. This dance is characterized by a fixed upper torso, bent legs, intricate footwork, and expressive hand gestures known as mudras. Facial expressions, or abhinaya, play a crucial role in storytelling, with themes often drawn from Hindu mythology and spiritual concepts. Dancers wear elaborate costumes featuring silk sarees with gold borders, ornate jewelry, and distinctive hair and makeup.</p>
+            <a style="color: #ffffff;" href="https://youtu.be/SgiLOzFQh14?si=CUg5E4994IydB-tY" class="recipe-link" target="_blank">Watch a video</a>
+        </div>
+    </div>
+
+    <div class="container left" id="container3" style="background-image: url('img/a3.jpg');">
+        <img src="img/a3.jpg" alt="Wonders Image 3" data-hover="img/a3-hover.jpg">
+        <div class="description">
+            <h2>THEYYAM</h2>
+            <p>Theyyam is a vibrant and ritualistic folk dance form that originates from Kerala. Deeply rooted in tribal traditions and spiritual practices, it is performed as a sacred offering to gods and ancestral spirits. The performers don elaborate costumes, intricate face paint, and towering headgear, transforming into divine or supernatural beings. Accompanied by music, drumming, and chanting, Theyyam enacts mythological stories and tribal legends, blending spirituality with performance.</p>
+            <a style="color: #ffffff;" href="https://youtu.be/jqKKxZwwHRY?si=LqH1UejDGLrHZhdN" class="recipe-link" target="_blank">Watch a video</a>
+        </div>
+    </div>
+
+    <div class="container" id="container4" style="background-image: url('img/a4.jpg');">
+        <img src="img/a4.jpg" alt="Wonders Image 4" data-hover="img/a4-hover.jpg">
+        <div class="description">
+            <h2>MANIPURI DANCE</h2>
+            <p>Hailing from Manipur in northeastern India, Manipuri is a classical dance form known for its elegance and fluidity. Its movements are gentle, rhythmic, and accompanied by subtle expressions, reflecting its roots in Vaishnavism. The dance often narrates episodes from Hindu epics, especially the Rasleela, depicting the divine love of Lord Krishna and Radha. Female dancers wear a traditional inaphi and phanek, complemented by a richly embroidered skirt called kumil and a transparent veil.</p>
+            <a style="color: #ffffff;" href="https://youtu.be/XQI0T5Kjw9E?si=8k6r_YR1iFrVXS1-" class="recipe-link" target="_blank">Watch a video</a>
+        </div>
+    </div>
+
+    <div class="container left" id="container3" style="background-image: url('img/a5.jpg');">
+        <img src="img/a5.jpg" alt="Wonders Image 3" data-hover="img/a3-hover.jpg">
+        <div class="description">
+            <h2>MOHINIYAATTAM</h2>
+            <p>Mohiniyattam, meaning "dance of the enchantress," is a classical dance form from Kerala. It is traditionally performed solo by women and draws inspiration from Hindu mythology, particularly the story of Mohini, the female avatar of Lord Vishnu. The dance is characterized by swaying, graceful movements, intricate gestures, and emotive expressions, embodying the essence of lasya (feminine grace). The themes often revolve around love, devotion, and spirituality, with performances accompanied by melodious Carnatic music. Dancers wear cream-colored sarees with golden borders (kasavu) and minimal jewelry, exuding simplicity and elegance. Mohiniyattam is a celebration of beauty, poise, and devotion.</p>
+            <a style="color: #ffffff;" href="https://youtu.be/S5yeHOXD0MA?si=tD5mS0YQZ5Q-cKWV" class="recipe-link" target="_blank">Watch a video</a>
+        </div>
+    </div>
+    <script>
+        function checkInView() {
+            const containers = document.querySelectorAll('.container');
+            containers.forEach((container) => {
+                const rect = container.getBoundingClientRect();
+                const inView = rect.top <= window.innerHeight && rect.bottom >= 0;
+                
+                if (inView) {
+                    container.classList.add('in-view');
+                    container.classList.remove('out-view');
+                } else {
+                    container.classList.add('out-view');
+                    container.classList.remove('in-view');
+                }
+            });
+        }
+
+        window.addEventListener('load', checkInView);
+        window.addEventListener('scroll', checkInView);
+    </script>
+    
+    
+</body>
+</html>
